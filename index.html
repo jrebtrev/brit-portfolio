@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>treb - portfolio</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              navy: "#0f172a",
+              slate: "#94a3b8",
+              light: "#e2e8f0",
+              teal: "#5eead4",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body {
+        background-color: #0f172a;
+        color: #94a3b8;
+      }
+      section {
+        scroll-margin-top: 100px;
+      }
+
+      .mouse-glow {
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 30;
+        background: radial-gradient(
+          600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          rgba(29, 78, 216, 0.15),
+          transparent 80%
+        );
+      }
+
+      .nav-link.active {
+        color: #e2e8f0;
+      }
+      .nav-link.active .nav-line {
+        width: 60px;
+        background-color: #e2e8f0;
+      }
+
+      .text-slate-200 {
+        --tw-text-opacity: 1;
+        color: rgb(226 232 240 / var(--tw-text-opacity));
+      }
+
+      /* --- clockwise draw tag animation --- */
+      /* .tag-draw {
+            position: relative;
+            display: inline-block; 
+        }
+
+        .tag-draw::before, .tag-draw::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 2px solid transparent;
+            box-sizing: border-box;
+            border-radius: 6px; 
+            pointer-events: none; 
+        }
+
+   
+        .tag-draw::before {
+            top: 0;
+            left: 0;
+        }
+
+
+        .tag-draw::after {
+            bottom: 0;
+            right: 0;
+        }
+
+
+        .tag-draw:hover::before {
+            width: 100%;
+            height: 100%;
+            border-top-color: #5eead4;
+            border-right-color: #5eead4;
+
+            transition: width 0.15s ease-out, height 0.15s ease-out 0.15s; 
+        }
+
+
+        .tag-draw:hover::after {
+            width: 100%;
+            height: 100%;
+            border-bottom-color: #5eead4;
+            border-left-color: #5eead4;
+
+            transition: border-color 0s ease-out 0.3s, width 0.15s ease-out 0.3s, height 0.15s ease-out 0.45s;
+        } */
+    </style>
+  </head>
+  <body
+    class="font-sans antialiased leading-relaxed m-0 selection:bg-teal selection:text-navy text-[15px]"
+  >
+    <div class="mouse-glow hidden lg:block"></div>
+
+    <div
+      class="max-w-[1200px] mx-auto px-6 sm:px-12 lg:pl-32 lg:pr-12 flex flex-col lg:flex-row lg:gap-12"
+    >
+      <header
+        class="lg:w-[45%] lg:h-screen lg:sticky lg:top-0 flex flex-col justify-between py-12 lg:py-[90px]"
+      >
+        <div>
+          <h1
+            class="text-4xl sm:text-[40px] font-bold text-light tracking-tight"
+          >
+            John Trevanian
+          </h1>
+          <h2 class="text-lg sm:text-xl font-medium text-light mt-3">
+            Inspiring Web Developer
+          </h2>
+          <p class="mt-5 max-w-xs text-sm">
+            "Jack of all trades, bad at everything—yet somehow versatile in my
+            failures."
+          </p>
+
+          <nav class="hidden lg:flex mt-20 flex-col space-y-6">
+            <a
+              href="#about"
+              class="nav-link group flex items-center text-[12px] font-bold tracking-widest text-slate hover:text-light transition-colors"
+            >
+              <span
+                class="nav-line w-8 h-px bg-slate mr-4 transition-all duration-300 group-hover:w-16 group-hover:bg-light"
+              ></span>
+              ABOUT
+            </a>
+            <a
+              href="#experience"
+              class="nav-link group flex items-center text-[12px] font-bold tracking-widest text-slate hover:text-light transition-colors"
+            >
+              <span
+                class="nav-line w-8 h-px bg-slate mr-4 transition-all duration-300 group-hover:w-16 group-hover:bg-light"
+              ></span>
+              EXPERIENCE
+            </a>
+            <a
+              href="#projects"
+              class="nav-link group flex items-center text-[12px] font-bold tracking-widest text-slate hover:text-light transition-colors"
+            >
+              <span
+                class="nav-line w-8 h-px bg-slate mr-4 transition-all duration-300 group-hover:w-16 group-hover:bg-light"
+              ></span>
+              PROJECTS
+            </a>
+          </nav>
+
+          <!-- <div class="mt-12 lg:mt-16">
+                    <h3 class="text-[13px] font-bold tracking-[0.15em] text-slate mb-4 uppercase">SKILLS</h3>
+                    <div class="flex flex-wrap gap-2 max-w-[320px]">
+                        <span class="tag-draw px-3 py-1 bg-teal/10 text-teal rounded-md text-[13px] font-bold">HTML & CSS</span>
+                        <span class="tag-draw px-3 py-1 bg-teal/10 text-teal rounded-md text-[13px] font-bold">JavaScript</span>
+                        <span class="tag-draw px-3 py-1 bg-teal/10 text-teal rounded-md text-[13px] font-bold">React</span>
+                        <span class="tag-draw px-3 py-1 bg-teal/10 text-teal rounded-md text-[13px] font-bold">TypeScript</span>
+                        <span class="tag-draw px-3 py-1 bg-teal/10 text-teal rounded-md text-[13px] font-bold">Git & GitHub</span>
+                    </div>
+                </div>
+
+                <div class="mt-8"> 
+                    <h3 class="text-[13px] font-bold tracking-[0.15em] text-slate mb-4 uppercase">TOOLS</h3>
+                    <div class="flex flex-wrap gap-2 max-w-[320px]">
+                        <span class="tag-draw px-3 py-1 bg-teal/10 text-teal rounded-md text-[13px] font-bold">VS Code</span>
+                        <span class="tag-draw px-3 py-1 bg-teal/10 text-teal rounded-md text-[13px] font-bold">Figma</span>
+                        <span class="tag-draw px-3 py-1 bg-teal/10 text-teal rounded-md text-[13px] font-bold">Vercel</span>
+                        <span class="tag-draw px-3 py-1 bg-teal/10 text-teal rounded-md text-[13px] font-bold">Postman</span>
+                    </div>
+                </div> -->
+        </div>
+
+        <div class="mt-8 lg:mt-0">
+          <div class="flex gap-6 text-[22px]">
+            <a
+              href="#"
+              aria-label="GitHub"
+              class="hover:text-light transition-colors"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a
+              href="#"
+              aria-label="LinkedIn"
+              class="hover:text-light transition-colors"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+            <a
+              href="mailto:your.email@example.com"
+              aria-label="Email"
+              class="hover:text-light transition-colors"
+              ><i class="fas fa-envelope"></i
+            ></a>
+          </div>
+
+          <p class="mt-6 text-[13px] text-slate/70 max-w-xs">
+            Design inspired by
+            <a
+              href="https://brittanychiang.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-light hover:text-teal transition-colors font-medium"
+            >
+              Brittany Chiang </a
+            >.
+          </p>
+        </div>
+      </header>
+
+      <main class="lg:w-[55%] pt-12 lg:pt-[90px] pb-[100px] lg:pb-[300px]">
+        <section id="about" class="mb-24 lg:mb-[200px] space-y-6">
+          <h2
+            class="text-[13px] font-bold tracking-[0.15em] text-slate-200 mb-8 uppercase lg:hidden"
+          >
+            About
+          </h2>
+
+          <p>
+            I am an aspiring adaptable developer and fast learner, eager to
+            explore new technologies and expand my skill set as a
+            <span class="font-medium text-light">jack of all trades</span>. I
+            thrive on building projects, continuously improving my craft, and
+            applying my skills to create impactful solutions.
+          </p>
+          <p>
+            Previously, I worked as a Computer Teacher at
+            <span class="font-medium text-light"
+              >Our Lady of Mt. Carmel Montessori</span
+            >, where I taught web development, game design, and programming
+            fundamentals. This role honed my ability to break down and simplify
+            complex technical concepts. Alongside teaching, I managed the
+            computer laboratory and provided critical technical support for
+            school-wide digital initiatives.
+          </p>
+          <p>
+            I hold a B.S. in Computer Science (Cum Laude) from the
+            <span class="font-medium text-light"
+              >University of the Cordilleras</span
+            >. When I am not writing code or looking for my next professional
+            opportunity, I am usually diving into my strong interest in
+            <span class="font-medium text-light">gaming</span> and interactive
+            digital experiences.
+          </p>
+        </section>
+
+        <section id="experience" class="mb-24 lg:mb-[200px]">
+          <h2
+            class="text-[13px] font-bold tracking-[0.15em] text-slate-200 mb-8 uppercase lg:hidden"
+          >
+            Experience
+          </h2>
+
+          <div class="group/list">
+            <div
+              class="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-12 p-4 -mx-4 rounded-xl border border-transparent hover:border-slate-700/50 hover:bg-slate-800/40 hover:shadow-lg hover:shadow-slate-900/20 transition-all group relative group-hover/list:opacity-50 group-hover/list:blur-[2px] hover:!opacity-100 hover:!blur-none"
+            >
+              <div
+                class="text-[14px] text-slate sm:mt-1 leading-relaxed sm:min-w-[130px] shrink-0 mb-2 sm:mb-0"
+              >
+                Jan 2025 &mdash;<br class="hidden sm:block" />
+                Apr 2026
+              </div>
+              <div>
+                <h3
+                  class="text-light text-base font-medium mb-2 group-hover:text-teal transition-colors"
+                >
+                  Computer Teacher & Tech Support · Our Lady of Mt. Carmel
+                  Montessori
+                </h3>
+                <p class="text-sm mb-4">
+                  Designed and delivered interactive ICT curricula encompassing
+                  web development, game development, and database fundamentals.
+                  Managed computer laboratory infrastructure, including system
+                  setups for digital assessments, and provided comprehensive
+                  school-wide technical support.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >HTML & CSS</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >JavaScript</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >Game Development</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >IT Infrastructure</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="flex flex-col sm:flex-row gap-4 sm:gap-6 p-4 -mx-4 rounded-xl border border-transparent hover:border-slate-700/50 hover:bg-slate-800/40 hover:shadow-lg hover:shadow-slate-900/20 transition-all group relative group-hover/list:opacity-50 group-hover/list:blur-[2px] hover:!opacity-100 hover:!blur-none"
+            >
+              <div
+                class="text-[14px] text-slate sm:mt-1 leading-relaxed sm:min-w-[130px] shrink-0 mb-2 sm:mb-0"
+              >
+                Oct 2024 &mdash;<br class="hidden sm:block" />
+                Jan 2025
+              </div>
+              <div>
+                <h3
+                  class="text-light text-base font-medium mb-2 group-hover:text-teal transition-colors"
+                >
+                  Customer Service Representative · Brandlink PH
+                </h3>
+                <p class="text-sm mb-4">
+                  Provided multi-channel technical support and troubleshooting
+                  for global hardware brands including Creality and Gaomon.
+                  Managed email ticketing and issue escalations via Udesk,
+                  resolved live chat inquiries, and moderated product reviews to
+                  ensure quality customer experiences.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >Technical Support</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >Ticket Management</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >Udesk</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >Troubleshooting</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="projects">
+          <h2
+            class="text-[13px] font-bold tracking-[0.15em] text-slate mb-8 uppercase lg:hidden"
+          >
+            Projects
+          </h2>
+
+          <div class="group/list">
+            <div
+              class="flex flex-col-reverse sm:flex-row gap-4 sm:gap-6 mb-12 p-4 -mx-4 rounded-xl border border-transparent hover:border-slate-700/50 hover:bg-slate-800/40 hover:shadow-lg hover:shadow-slate-900/20 transition-all group relative group-hover/list:opacity-50 group-hover/list:blur-[2px] hover:!opacity-100 hover:!blur-none"
+            >
+              <div class="w-full sm:w-[140px] shrink-0 sm:mt-1 mt-4">
+                <img
+                  src="/assets/os-portfolio.png"
+                  alt="OS Style Portfolio Preview"
+                  class="w-full h-auto rounded border-2 border-slate/20 group-hover:border-slate/50 transition-colors"
+                />
+              </div>
+              <div>
+                <h3
+                  class="text-light text-base font-medium mb-2 group-hover:text-teal transition-colors"
+                >
+                  <a
+                    href="https://jrebtrev.github.io/portfolio/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="focus-visible:text-teal"
+                  >
+                    <span class="absolute inset-0"></span>
+                    OS Style Portfolio
+                    <span
+                      class="inline-block transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                      >↗</span
+                    >
+                  </a>
+                </h3>
+                <p class="text-sm mb-4">
+                  An interactive, web-based portfolio designed to mimic a
+                  classic desktop operating system interface. Built with custom
+                  interactive elements including draggable windows, a functional
+                  taskbar, and simulated file-system navigation to create a
+                  highly engaging user experience.
+                </p>
+                <div class="flex flex-wrap gap-2 relative z-10">
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >HTML & CSS</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >JavaScript</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >UI/UX Design</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >Event Handling</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="flex flex-col-reverse sm:flex-row gap-4 sm:gap-6 p-4 -mx-4 rounded-xl border border-transparent hover:border-slate-700/50 hover:bg-slate-800/40 hover:shadow-lg hover:shadow-slate-900/20 transition-all group relative group-hover/list:opacity-50 group-hover/list:blur-[2px] hover:!opacity-100 hover:!blur-none"
+            >
+              <div class="w-full sm:w-[140px] shrink-0 sm:mt-1 mt-4">
+                <img
+                  src="https://via.placeholder.com/200x120/1e293b/94a3b8?text=Coming+Soon"
+                  alt="Placeholder Preview"
+                  class="w-full h-auto rounded border-2 border-slate/20 group-hover:border-slate/50 transition-colors"
+                />
+              </div>
+              <div>
+                <h3
+                  class="text-light text-base font-medium mb-2 group-hover:text-teal transition-colors"
+                >
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="focus-visible:text-teal"
+                  >
+                    <span class="absolute inset-0"></span>
+                    Upcoming Project
+                    <span
+                      class="inline-block transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"
+                      >↗</span
+                    >
+                  </a>
+                </h3>
+                <p class="text-sm mb-4">
+                  Currently in the planning phases for a new front-end
+                  application. Exploring different APIs and state management
+                  techniques to build a highly responsive and dynamic user
+                  interface.
+                </p>
+                <div class="flex flex-wrap gap-2 relative z-10">
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >React</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >Tailwind CSS</span
+                  >
+                  <span
+                    class="px-3 py-1 bg-teal/10 text-teal rounded-full text-xs font-bold"
+                    >API Integration</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const glow = document.querySelector(".mouse-glow");
+      window.addEventListener("mousemove", (event) => {
+        glow.style.setProperty("--mouse-x", `${event.clientX}px`);
+        glow.style.setProperty("--mouse-y", `${event.clientY}px`);
+      });
+
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      const observerOptions = {
+        root: null,
+        rootMargin: "-20% 0px -40% 0px",
+        threshold: 0,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navLinks.forEach((link) => link.classList.remove("active"));
+            const activeId = entry.target.getAttribute("id");
+            const activeLink = document.querySelector(
+              `.nav-link[href="#${activeId}"]`,
+            );
+            if (activeLink) activeLink.classList.add("active");
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach((section) => observer.observe(section));
+    </script>
+  </body>
+</html>
